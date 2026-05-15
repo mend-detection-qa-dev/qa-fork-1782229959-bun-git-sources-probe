@@ -1,0 +1,10 @@
+{
+  "name": "bun-git-sources-probe",
+  "version": "0.1.0",
+  "description": "Mend SCA detection probe — covers git-dependency and github-shorthand patterns. Both map to source: git.",
+  "private": true,
+  "dependencies": {
+    "is-odd": "git+https://github.com/jonschlinkert/is-odd.git#3.0.1",
+    "is-even": "github:jonschlinkert/is-even#1.0.0"
+  }
+}

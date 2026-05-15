@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "pm": "bun",
+  "pm_version_tested": "1.2.0",
+  "source_file": "bun.lock",
+  "generated_at": "2026-05-15T00:00:00+00:00",
+  "root": {
+    "name": "bun-git-sources-probe",
+    "version": "0.1.0",
+    "dependencies": [
+      "is-even",
+      "is-odd"
+    ]
+  },
+  "packages": {
+    "is-odd": {
+      "version": "3.0.1",
+      "source": "git",
+      "group": "main",
+      "dependencies": [
+        "is-number"
+      ],
+      "source_detail": {
+        "url": "https://github.com/jonschlinkert/is-odd.git",
+        "tag": "3.0.1",
+        "commit": "a80ee0d831a8ee69f1fad5b4673491847975eb26",
+        "manifest_form": "git+https://github.com/jonschlinkert/is-odd.git#3.0.1",
+        "protocol": "git+https"
+      }
+    },
+    "is-even": {
+      "version": "1.0.0",
+      "source": "git",
+      "group": "main",
+      "dependencies": [
+        "is-odd@0.1.2"
+      ],
+      "source_detail": {
+        "url": "https://github.com/jonschlinkert/is-even.git",
+        "tag": "1.0.0",
+        "commit": "a94a9be2783fdd77fa37195e4fabb22fc51e573e",
+        "manifest_form": "github:jonschlinkert/is-even#1.0.0",
+        "protocol": "github-shorthand",
+        "expanded_url": "https://github.com/jonschlinkert/is-even.git"
+      }
+    },
+    "is-number": {
+      "version": "6.0.0",
+      "source": "registry",
+      "group": "main",
+      "dependencies": [],
+      "source_detail": {
+        "registry": "https://registry.npmjs.org"
+      }
+    },
+    "is-odd@0.1.2": {
+      "version": "0.1.2",
+      "source": "registry",
+      "group": "main",
+      "dependencies": [],
+      "source_detail": {
+        "registry": "https://registry.npmjs.org"
+      },
+      "_note": "Registry-sourced is-odd, distinct from the git-sourced is-odd@3.0.1 declared at root. Pulled in by is-even@1.0.0 (github-shorthand dep) which declares is-odd@^0.1.2."
+    }
+  },
+  "project_metadata": {
+    "source_file": "bun.lock",
+    "groups": [
+      "main"
+    ]
+  },
+  "warnings": [
+    "PRIMARY ASSERTION: Both is-odd (full git+https URL) and is-even (github: shorthand) MUST report source='git'. If either reports source='registry', Mend has failed to detect the git source type for that manifest form.",
+    "SHORTHAND EXPANSION: The manifest value 'github:jonschlinkert/is-even#1.0.0' is syntactic sugar for 'git+https://github.com/jonschlinkert/is-even.git#1.0.0'. Mend must expand the github: shorthand before source classification. Failure mode: source reported as 'registry' or 'unknown' instead of 'git'.",
+    "DUAL is-odd: Two distinct is-odd entries coexist — is-odd@3.0.1 (git-sourced, root direct dep) and is-odd@0.1.2 (registry-sourced, transitive via is-even). Mend must track both and not collapse them. If only one appears, the other was dropped.",
+    "TRANSITIVE SOURCE: is-number@6.0.0 is a registry-sourced transitive of the git-sourced is-odd@3.0.1. Mend must follow transitive edges from git-sourced packages into registry packages. If is-number is missing, the transitive edge from a git dep is not being walked.",
+    "MEND LIMITATION: Bun is NOT a UA-supported resolver. The npm-resolver fallback may misparse the 'git' descriptor block inside bun.lock package tuples, silently dropping source_detail or reclassifying source as 'registry'. This probe is an exploratory/regression probe for that gap.",
+    "SHA1: Git-sourced packages have no registry URL and no tgz SHA1. Mend must handle absent SHA1 for git deps gracefully (emit null or omit) — a hard failure here means git deps are blocked entirely."
+  ]
+}
